@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学术主页模板</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --light-text: #7f8c8d;
+            --border-color: #ddd;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* 个人信息部分 */
+        .profile-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .profile-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px;
+            background-color: #ddd;
+            display: inline-block;
+        }
+
+        .profile-name {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .profile-email {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            padding: 60px 0;
+        }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        /* 关于我 */
+        .about-text {
+            margin-bottom: 20px;
+        }
+
+        /* 研究兴趣 */
+        .interests-list {
+            list-style: none;
+        }
+
+        .interests-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .interests-list li:before {
+            content: "•";
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+
+        /* 新闻 */
+        .news-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .news-date {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        /* 出版物 */
+        .publication {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .publication:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .pub-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .pub-authors {
+            font-style: italic;
+            margin-bottom: 5px;
+            color: var(--light-text);
+        }
+
+        .pub-venue {
+            margin-bottom: 10px;
+            color: var(--light-text);
+        }
+
+        .pub-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .pub-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pub-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* 获奖情况 */
+        .awards-year {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .award-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .award-item:before {
+            content: "🏆";
+            position: absolute;
+            left: 0;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-info {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            width: 30px;
+            color: var(--secondary-color);
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">学术人员</div>
+                <nav>
+                    <ul>
+                        <li><a href="#about">关于我</a></li>
+                        <li><a href="#research">研究兴趣</a></li>
+                        <li><a href="#news">新闻</a></li>
+                        <li><a href="#publications">出版物</a></li>
+                        <li><a href="#awards">获奖</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-content">
+                <!-- 头像占位 -->
+                <div class="profile-img"></div>
+                <h1 class="profile-name">学术人员</h1>
+                <p class="profile-title">某大学计算机科学系博士生</p>
+                <p class="profile-email">researcher@example.edu</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-google-scholar"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="content-primary">
+                <section id="about" class="section">
+                    <h2 class="section-title">关于我</h2>
+                    <p class="about-text">
+                        我是一名计算机科学领域的博士研究生，专注于人工智能和机器学习方向的研究。我的工作主要集中在开发创新的算法和方法，以解决复杂的现实问题。
+                    </p>
+                    <p class="about-text">
+                        在学术表现方面，我的平均GPA为3.9，在系内排名前5%。我在一位知名教授的指导下进行研究，专注于深度学习及其应用。最近，我在一家领先的研究机构担任研究实习生，从事大规模机器学习项目。
+                    </p>
+                    <p class="about-text">
+                        我的主要研究目标是开发能够理解和生成自然语言的人工智能系统，使其能够更好地服务于人类需求。我目前正在寻求博士后的研究机会，希望能与领域内的专家学者交流合作。
+                    </p>
+                </section>
+
+                <section id="research" class="section">
+                    <h2 class="section-title">研究兴趣</h2>
+                    <ul class="interests-list">
+                        <li><strong>自然语言处理</strong>: 大语言模型、文本生成、对话系统、多语言处理</li>
+                        <li><strong>多模态机器学习</strong>:
+视觉-语言理解、跨模态检索、多模态表示学习</li>
+                        <li><strong>人工智能伦理</strong>: 模型可解释性、公平性、AI对齐问题</li>
+                        <li><strong>强化学习</strong>: 深度强化学习、多智能体系统、机器人控制</li>
+                    </ul>
+                </section>
+
+                <section id="news" class="section">
+                    <h2 class-="section-title">新闻动态</h2>
+                    <div class="news-item">
+                        <div class-="news-date">[2025年10月]</div>
+                        <div class-="news-content">我们的论文"多模态对话系统的统一框架"被顶级会议接收！</div>
+                    </div>
+                    <div class-="news-item">
+                        <div class-="news-date">[2025年8月]</div>
+                        <div class-="news-content">在某知名研究机构完成暑期实习，专注于大语言模型对齐研究</div>
+                    </div>
+                    <div class-="news-item">
+                        <div class-="news-date">[2025年5月]</div>
+                        <div class-="news-content">获得优秀研究生奖学金</div>
+                    </div>
+                    <div class-="news-item">
+                        <div class-="news-date">[2025年3月]</div>
+                        <div class-="news-content">在国际人工智能会议上报告我们的工作"面向低资源语言的跨语言迁移学习"</div>
+                    </div>
+                </section>
+
+                <section id="publications" class="section">
+                    <h2 class-="section-title">代表性出版物</h2>
+
+                    <div class-="publication">
+                        <div class-="pub-title">多模态对话系统的统一框架</div>
+                        <div class-="pub-authors">学术人员, 合作者A, 合作者B, 合作者C</div>
+                        <div class-="pub-venue">顶级人工智能会议, 2025</div>
+                        <div class-="pub-links">
+                            <a href="#"><i class-="fas fa-file-pdf"></i> PDF</a>
+                            <a href="#"><i class-="fas fa-code"></i> 代码</a>
+                            <a href="#"><i class-="fas fa-external-link-alt"></i> 项目</a>
+                        </div>
+                    </div>
+
+                    <div class-="publication">
+                        <div class-="pub-title">面向低资源语言的跨语言迁移学习</div>
+                        <div class-="pub-authors">学术人员, 合作者A, 合作者B</div>
+                        <div class-="pub-venue">国际人工智能会议, 2025</div>
+                        <div class-="pub-links">
+                            <a href="#"><i class-="fas fa-file-pdf"></i> PDF</a>
+                            <a href="#"><i class-="fas fa-code"></i> 代码</a>
+                            <a href="#"><i class-="fas fa-external-link-alt"></i> 项目</a>
+                        </div>
+                    </div>
+
+                    <div class-="publication">
+                        <div class-="pub-title">基于对比学习的多语言文本表示</div>
+                        <div class-="pub-authors">学术人员, 合作者A, 合作者B</div>
+                        <div class-="pub-venue">自然语言处理会议, 2024</div>
+                        <div class-="pub-links">
+                            <a href="#"><i class-="fas fa-file-pdf"></i> PDF</a>
+                            <a href="#"><i class-="fas fa-code"></i> 代码</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="awards" class-="section">
+                    <h2 class-="section-title">获奖情况</h2>
+
+                    <div class-="awards-year">2025</div>
+                    <div class-="award-item">优秀研究生奖学金</div>
+                    <div class-="award-item">最佳论文奖 - 人工智能会议</div>
+
+                    <div class-="awards-year">2024</div>
+                    <div class-="award-item">国家奖学金</div>
+                    <div class-="award-item">学术创新奖</div>
+
+                    <div class-="awards-year">2023</div>
+                    <div class-="award-item">优秀学生奖</div>
+                    <div class-="award-item">程序设计竞赛奖项</div>
+                </section>
+            </div>
+
+            <div class-="sidebar">
+                <section class-="contact-info">
+                    <h2 class-="section-title">联系信息</h2>
+                    <div class-="contact-item">
+                        <i class-="fas fa-university"></i>
+                        <span>某大学计算机科学系</span>
+                    </div>
+                    <div class-="contact-item">
+                        <i class-="fas fa-envelope"></i>
+                        <span>researcher@example.edu</span>
+                    </div>
+                    <div class-="contact-item">
+                        <i class-="fas fa-map-marker-alt"></i>
+                        <span>某城市</span>
+                    </div>
+                </section>
+
+                <section class-="section">
+                    <h2 class-="section-title">教育背景</h2>
+                    <div class-="education-item">
+                        <h3>某大学</h3>
+                        <p>计算机科学系</p>
+                        <p>计算机科学专业博士</p>
+                        <p>2022年至今</p>
+                        <p>GPA: 3.9/4.0</p>
+                    </div>
+                    <div class-="education-item" style-="margin-top: 15px;">
+                        <h3>某大学</h3>
+                        <p>计算机科学与技术系</p>
+                        <p>计算机科学硕士</p>
+                        <p>2019-2022年</p>
+                    </div>
+                    <div class-="education-item" style-="margin-top: 15px;">
+                        <h3>某大学</h3>
+                        <p>计算机科学与技术学院</p>
+                        <p>计算机科学学士</p>
+                        <p>2015-2019年</p>
+                    </div>
+                </section>
+
+                <section class-="section">
+                    <h2 class-="section-title">研究经历</h2>
+                    <div class-="experience-item">
+                        <h3>研究实习生</h3>
+                        <p>某知名研究机构</p>
+                        <p>2024年6月-2024年9月</p>
+                        <p>指导老师: 某博士</p>
+                        <p>专注于大语言模型对齐研究</p>
+                    </div>
+                    <div class-="experience-item" style-="margin-top: 15px;">
+                        <h3>研究助理</h3>
+                        <p>某大学人工智能实验室</p>
+                        <p>2022年至今</p>
+                        <p>指导老师: 某教授</p>
+                    </div>
+                </section>
+
+                <section class-="section">
+                    <h2 class-="section-title">专业技能</h2>
+                    <div class-="skills">
+                        <p><strong>编程语言:</strong> Python, Java, C++, JavaScript</p>
+                        <p><strong>框架与工具:</strong> PyTorch, TensorFlow, Hugging Face, Git</p>
+                        <p><strong>语言能力:</strong> 中文(母语), 英语(流利), 日语(基础)</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class-="container">
+            <p>© 2025 学术人员. 最后更新:
+2025年11月</p>
+        </div>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 简单的动画效果
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.outerHeight;
+
+                if (sectionTop < windowHeight * 0.85) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // 初始化样式
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s, transform 0.5s';
+        });
+
+        // 页面加载后触发滚动效果
+        window.addEventListener('load', function() {
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+</body>
+</html>
+
